@@ -4,7 +4,7 @@
 // This function is used to extract DOM elements.
 (function () {
   // Override this method to use a custom element extractor.
-  Backbone.Syphon.ElementExtractors = function ($view) {
+  Backbone.Syphon.ElementExtractor = function ($view) {
     if ($view.is('form')) {
       return $view.get(0).elements;
     } else {
