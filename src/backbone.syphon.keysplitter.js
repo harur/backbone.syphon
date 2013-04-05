@@ -10,7 +10,7 @@
 Backbone.Syphon.KeySplitter = function(key){
   var matches = key.match(/[^\[\]]+/g);
 
-  if (key.indexOf("[]") === key.length - 2){
+  if (key.indexOf("[]") === key.length - 2 && key.length > 1){
     lastKey = matches.pop();
     matches.push([lastKey]);
   }
