@@ -282,3 +282,5 @@ Backbone.Syphon = (function(Backbone, $, _){
 //= backbone.syphon.keysplitter.js
 
 //= backbone.syphon.keyjoiner.js
+
+//= backbone.syphon.elementextractors.js
