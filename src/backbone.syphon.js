@@ -88,8 +88,7 @@ Backbone.Syphon = (function(Backbone, $, _){
   // Retrieve all of the form inputs
   // from the form
   var getInputElements = function(view, config){
-    var form = getForm(view);
-    var elements = form.elements;
+    var elements = config.ElementsExtractors(view.$el ? view.$el : $(view));
 
     elements = _.reject(elements, function(el){
       var reject;
@@ -141,16 +140,6 @@ Backbone.Syphon = (function(Backbone, $, _){
     // type registrations.
     return type.toLowerCase();
   };
-  
-  // If a form element is given, just return it. 
-  // Otherwise, get the form element from the view.
-  var getForm = function(viewOrForm){
-    if (_.isUndefined(viewOrForm.$el) && viewOrForm.tagName.toLowerCase() === 'form'){
-      return viewOrForm;
-    } else {
-      return viewOrForm.$el.is("form") ? viewOrForm.el : viewOrForm.$("form")[0];
-    }
-  };
 
   // Build a configuration object and initialize
   // default values.
@@ -163,6 +152,7 @@ Backbone.Syphon = (function(Backbone, $, _){
     config.keyExtractors = config.keyExtractors || Syphon.KeyExtractors;
     config.keySplitter = config.keySplitter || Syphon.KeySplitter;
     config.keyJoiner = config.keyJoiner || Syphon.KeyJoiner;
+    config.ElementExtractors = config.ElementExtractors || Syphon.ElementExtractors;
     config.keyAssignmentValidators = config.keyAssignmentValidators || Syphon.KeyAssignmentValidators;
     
     return config;
