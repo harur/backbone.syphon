@@ -40,7 +40,7 @@ Backbone.Syphon = (function(Backbone, $, _){
       // Get the key assignment validator and make sure
       // it's valid before assigning the value to the key
       var validKeyAssignment = config.keyAssignmentValidators.get(type);
-      if (validKeyAssignment($el, key, value)){
+      if (key && validKeyAssignment($el, key, value)){
         var keychain = config.keySplitter(key);
         data = assignKeyValue(data, keychain, value);
       }
@@ -72,13 +72,14 @@ Backbone.Syphon = (function(Backbone, $, _){
       // Get the key for the input
       var keyExtractor = config.keyExtractors.get(type);
       var key = keyExtractor($el);
+      if (key) {
+        // Get the input writer and the value to write
+        var inputWriter = config.inputWriters.get(type);
+        var value = flattenedData[key];
 
-      // Get the input writer and the value to write
-      var inputWriter = config.inputWriters.get(type);
-      var value = flattenedData[key];
-
-      // Write the value to the input
-      inputWriter($el, value);
+        // Write the value to the input
+        inputWriter($el, value);
+      }
     });
   };
 
