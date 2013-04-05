@@ -1,4 +1,4 @@
-// Backbone.Syphon.ElementExtractors
+// Backbone.Syphon.ElementExtractor
 // --------------
 
 // This function is used to extract DOM elements.
