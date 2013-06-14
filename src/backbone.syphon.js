@@ -31,16 +31,16 @@ Backbone.Syphon = (function(Backbone, $, _){
 
       // Get the key for the input
       var keyExtractor = config.keyExtractors.get(type);
-      var key = keyExtractor($el);
+      var key = keyExtractor($el, options);
 
       // Get the value for the input
       var inputReader = config.inputReaders.get(type);
-      var value = inputReader($el);
+      var value = inputReader($el, options);
 
       // Get the key assignment validator and make sure
       // it's valid before assigning the value to the key
       var validKeyAssignment = config.keyAssignmentValidators.get(type);
-      if (key && validKeyAssignment($el, key, value)){
+      if (key && validKeyAssignment($el, key, value, options)){
         var keychain = config.keySplitter(key);
         data = assignKeyValue(data, keychain, value);
       }
@@ -71,14 +71,14 @@ Backbone.Syphon = (function(Backbone, $, _){
 
       // Get the key for the input
       var keyExtractor = config.keyExtractors.get(type);
-      var key = keyExtractor($el);
+      var key = keyExtractor($el, options);
       if (key) {
         // Get the input writer and the value to write
         var inputWriter = config.inputWriters.get(type);
         var value = flattenedData[key];
 
         // Write the value to the input
-        inputWriter($el, value);
+        inputWriter($el, value, options);
       }
     });
   };
